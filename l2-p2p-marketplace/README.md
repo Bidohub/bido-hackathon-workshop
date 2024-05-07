@@ -1,10 +1,10 @@
-# Decentralized P2P Runes Marketplace on Bevm
+# Decentralized P2P Marketplace on Bevm
 
-This document provides a detailed description of the decentralized market operations for trading Runes tokens on the Bevm platform. Users can directly purchase BTC assets located on the first layer (L1, i.e., the Bitcoin network) on the second layer (L2), and the entire purchasing process is seamless for users, without the need for users to be aware of the blockchain layer being operated on.
+This document provides a detailed description of the decentralized market operations for trading Runes and BRC20 tokens tokens on the Bevm platform. Users can directly purchase BTC assets located on the first layer (L1, i.e., the Bitcoin network) on the second layer (L2), and the entire purchasing process is seamless for users, without the need for users to be aware of the blockchain layer being operated on.
 
 ## Contract Overview
 
-The `l2MarketPlace` smart contract on Bevm facilitates the creation and management of buy orders for Runes tokens. This contract integrates various functionalities such as order placement, cancellation, and execution while ensuring the integrity and security of the transactions.
+The `l2MarketPlace` smart contract on Bevm facilitates the creation and management of buy orders for Runes and BRC20 tokens. This contract integrates various functionalities such as order placement, cancellation, and execution while ensuring the integrity and security of the transactions.
 
 ## Features
 * **Transparent Layer Interaction**: User operations on L2 directly affect the BTC asset status on L1, all handled automatically by the smart contract without any need for direct interaction with the Bitcoin network.
