@@ -1,0 +1,7 @@
+MAST Script:
+  IF receive(proof_of_bBTC_burn_on_Bevm AND signature_of_validator)
+    THEN 
+      unlock_bitcoins_to(user_btc_address)  // 解锁比特币到用户指定地址
+  ELSE IF current_time > timeout
+    THEN 
+      refund_bitcoins_to(original_sender)   // 超时退款到原始发送者

@@ -1,0 +1,8 @@
+Chain-Off Service:
+  Monitor Bitcoin network for locked bitcoins
+  Collect proofs of locked bitcoins
+  Submit proofs to Bevm smart contract to mint bBTC
+
+  Monitor Bevm smart contract for burned bBTC events
+  Collect proofs of burned bBTC
+  Submit proofs to Bitcoin network's MAST script to unlock bitcoins
