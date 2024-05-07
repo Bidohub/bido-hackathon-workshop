@@ -101,21 +101,21 @@ contract l2P2PMarketPlace is Ownable, Pausable {
         revert("NOT_SUPPORT_RECEIVE");
     }
 
-    // 初始化跨链交易
+    // Initialize cross-chain transaction
     function initiateCrossChainTransaction(
         bytes memory _btcAddr,
         uint256 _btcAmount
     ) private {
-        // 调用跨链桥的合约进行资金锁定
-        // 这里需要根据实际的跨链桥合约接口进行调整
+        // Call the cross-chain bridge contract to lock funds
+        // This needs to be adjusted based on the actual cross-chain bridge contract interface
     }
 
-    // 处理跨链资金接收
+    // Handle received cross-chain funds
     function handleReceivedFunds(uint256 _orderId, bytes32 _txid) private {
-        // 验证交易并更新订单状态
+        // Verify transaction and update order status
         OrderInfo storage order = orderInfos[_orderId];
         order.txid = _txid;
-        order.status = 1; // 标记为完成
+        order.status = 1; // Mark as completed
         emit Unlocked(order.creator, order.btcAmount);
     }
 

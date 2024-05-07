@@ -11,18 +11,6 @@ The `l2MarketPlace` smart contract on Bevm facilitates the creation and manageme
 * **Order Placement and Execution**: Users can place buy orders through a simple interface on Bevm, with the system automatically handling all transactions and transfers related to BTC assets.
 * **Decentralized Control and Security Measures**: Control mechanisms implemented through the smart contract ensure the security and transparency of transactions, preventing unauthorized actions.
 
-## Integrated Cross-Chain Bridge Features
-
-### Operations Using the Cross-Chain Bridge
-Utilizing the decentralized cross-chain bridge, `l2MarketPlace` can perform the following key functions:
-
-#### `initiateCrossChainBuy`
-- When a user initiates a buy order for BTC on Bevm, the contract uses the cross-chain bridge to lock the corresponding BTC on the Bitcoin network.
-- This feature ensures users can directly control BTC assets from Bevm, enhancing convenience and speed.
-
-#### `finalizeCrossChainSell`
-- When an order is executed on Bevm, the contract triggers the release of the corresponding BTC to the seller's specified address on the Bitcoin network via the cross-chain bridge.
-- This process automates the transfer of BTC from L2 to L1, ensuring the security of funds and transparency of transactions.
 
 ## Smart Contract Functions
 
