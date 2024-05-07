@@ -1,34 +1,34 @@
 pragma solidity ^0.8.0;
 
 contract CrossChainBridge {
-    mapping(address => uint256) public balances; // 用户的 bBTC 余额
+    mapping(address => uint256) public balances; // Balances of bBTC for users
 
-    // 事件记录
+    // Event records
     event Locked(address indexed user, uint256 amount);
     event Unlocked(address indexed user, uint256 amount);
     event Minted(address indexed user, uint256 amount);
     event Burned(address indexed user, uint256 amount);
 
-    // 铸造 bBTC
+    // Mint bBTC
     function mint(address user, uint256 amount) external {
         require(verifyLockProof(), "Invalid lock proof");
         balances[user] += amount;
         emit Minted(user, amount);
     }
 
-    // 赎回 bBTC
+    // Redeem bBTC
     function burn(address user, uint256 amount) external {
         require(balances[user] >= amount, "Insufficient balance");
         balances[user] -= amount;
         emit Burned(user, amount);
-        // 链下服务需要监听这个事件并处理比特币的解锁
+        // Off-chain services need to monitor this event and handle the unlocking of Bitcoin
     }
 
     /**
-    在这个函数中，我们假设 txHash 是比特币交易的哈希，merkleProof
-    是构成从该交易哈希到比特币区块根哈希路径的一系列哈希，blockHash 
-    是包含该交易的比特币区块的根哈希。
-    该函数通过重建 Merkle 路径来验证交易是否存在于该区块中。
+    In this function, we assume txHash is the hash of the Bitcoin transaction, merkleProof
+    is a series of hashes forming the path from the transaction hash to the root hash of the Bitcoin block,
+    and blockHash is the root hash of the Bitcoin block that includes the transaction.
+    This function verifies that the transaction exists in the block by reconstructing the Merkle path.
     */
     function verifyBTCProof(
         bytes32 txHash,

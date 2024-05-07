@@ -1,4 +1,4 @@
-# 利用 MAST 技术从比特币 (BTC) 到 Bevm 的去中心化跨链桥
+# 利用 MAST 实现从比特币 (BTC) 到 Bevm 的去中心化跨链桥
 
 使用 MAST（Merkleized Abstract Syntax Trees，默克尔化抽象语法树）技术实现的跨链桥不仅安全高效，而且通过只公开必要的交易信息来增强隐私性。以下是跨链操作的详细流程描述：
 
