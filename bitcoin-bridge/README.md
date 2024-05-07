@@ -2,25 +2,25 @@
 
 The implementation of the decentralized cross-chain bridge leveraging MAST (Merkleized Abstract Syntax Trees) technology facilitates a secure and efficient process while enhancing privacy by revealing only essential transaction information. This document outlines the comprehensive steps involved in the bridge's operation.
 
-1. Bitcoin Chain: Asset Locking
+## 1. Bitcoin Chain: Asset Locking
 The first step involves users sending their BTC to a specific address controlled by a MAST script on the Bitcoin blockchain. This script is a complex conditional script designed to manage the release of funds under certain conditions.
 
 * Script Creation: The script incorporates multiple branches, allowing the release of funds under conditions such as successful event proofs on Bevm or reaching a specific time point (enabling refunds through a timeout mechanism).
 * Sending Bitcoin: Users execute a standard Bitcoin transaction to send BTC to the MAST-controlled address.
 
-2. Interaction on Bevm
+## 2. Interaction on Bevm
 Upon successful locking of the Bitcoin, off-chain participants (such as cross-chain service providers) monitor these transactions and trigger corresponding actions on the Bevm blockchain.
 
 * Off-Chain Monitoring and Verification: Utilizing relay service nodes to monitor the Bitcoin network, the service waits to confirm the transaction has been locked, then collects necessary transaction data (e.g., transaction ID, Merkle Proof), potentially using cross-chain messaging protocols like Polyhedra.
 * Submitting Proof to Bevm: This data is submitted to a smart contract on Bevm. This contract is responsible for verifying the evidence received from the Bitcoin network to confirm that the locking event has indeed occurred.
 
-3. Token Minting
+## 3. Token Minting
 On Bevm, a smart contract mints an equivalent amount of tokens based on the amount of Bitcoin locked.
 
 * Minting Process: The smart contract mints a new token (e.g., bBTC), representing the Bitcoin locked on Bevm.
 * Distributing bBTC: The minted bBTC is allocated to the Bevm address of the user who initiated the cross-chain request.
 
-4. Redemption and Unlocking
+## 4. Redemption and Unlocking
 After using bBTC on Bevm, users may wish to convert them back to the original Bitcoin. This requires initiating a redemption operation on Bevm, followed by unlocking the Bitcoin through the MAST script.
 
 * Redemption Request: Users submit a redemption request from Bevm to Bitcoin, burning the corresponding amount of bBTC.
