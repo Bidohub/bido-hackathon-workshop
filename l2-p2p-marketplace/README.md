@@ -46,7 +46,8 @@ Utilizing the decentralized cross-chain bridge, `l2MarketPlace` can perform the 
 ```solidity
 contractInstance.buyWithCrossChain("btc_address", "Runes", 100, 1, {value: web3.toWei(0.1, "ether")});
 ```
-** Executing an Order
+**Executing an Order**
+
 ```
 contractInstance.sellWithCrossChain([orderId], ["txid"]);
 ```
