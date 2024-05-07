@@ -1,4 +1,4 @@
-# hackathon-workshop
+# Bido-Hackathon-Workshop
 
 This repository hosts two major projects focused on blockchain interoperability and decentralized financial applications: Bitcoin Bridge and L2 P2P Marketplace. Each project is detailed in its own subdirectory with documentation available in both English and Chinese.
 
