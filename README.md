@@ -2,8 +2,7 @@
 
 This repository hosts two major projects focused on blockchain interoperability and decentralized financial applications: Bitcoin Bridge and L2 P2P Marketplace. Each project is detailed in its own subdirectory with documentation available in both English and Chinese.
 
-## Projects
-1. Bitcoin Bridge
+## 1. Bitcoin Bridge
 The Bitcoin Bridge facilitates a decentralized cross-chain interaction between Bitcoin and Bevm. It leverages advanced blockchain scripting with MAST and smart contracts to ensure secure and seamless transactions.
 
 - **English Documentation**: [View English README](./bitcoin-bridge/README.md)
