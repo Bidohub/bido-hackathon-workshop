@@ -12,8 +12,8 @@ The Bitcoin Bridge facilitates a decentralized cross-chain interaction between B
   - `mast.script`: Script for MAST-based operations on the Bitcoin network.
   - `relay`: Infrastructure component for relaying transactions and proofs between blockchains.
 
-## 2. Decentralized P2P L2 Marketplace on Bevm
-The Decentralized P2P L2 Marketplace operates on a Layer 2 scaling solution, enabling peer-to-peer trading of digital assets with enhanced transaction speed and reduced costs. It provides an efficient marketplace mechanism directly on the second layer without the need for users to interact with the main blockchain.
+## 2. Decentralized P2P Marketplace on Bevm
+The Decentralized P2P Marketplace operates on a Layer 2 scaling solution, enabling peer-to-peer trading of digital assets with enhanced transaction speed and reduced costs. It provides an efficient marketplace mechanism directly on the second layer without the need for users to interact with the main blockchain.
 
 - **English Documentation**: [View English README](./l2-p2p-marketplace/README.md)
 - **Chinese Documentation**: [查看中文文档](./l2-p2p-marketplace/README-cn.md)
