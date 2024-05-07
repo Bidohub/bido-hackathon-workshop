@@ -21,14 +21,5 @@ The L2 P2P Marketplace operates on a Layer 2 scaling solution, enabling peer-to-
 - **Key Component**:
   - `l2MarketPlace.sol`: Smart contract for managing peer-to-peer transactions and order book functionality on Layer 2.
 
-## Language Options
-For convenience, documentation for each project is available in both English and Chinese. Use the links provided above to switch between languages according to your preference.
-
-## Technical Details
-The repository's structure is designed to facilitate easy navigation and understanding of the different components involved in each project. The modular design ensures that each part of the projects can be independently developed, tested, and deployed.
-
-## Contributing
-Contributions to either of the projects are welcome. Please refer to the specific project's documentation for guidelines on contributing and the process for submitting pull requests.
-
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
