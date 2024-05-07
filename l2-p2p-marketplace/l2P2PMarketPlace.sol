@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 import "openzeppelin-contracts/contracts/access/Ownable.sol";
 import "openzeppelin-contracts/contracts/security/Pausable.sol";
 
-contract l2MarketPlace is Ownable, Pausable {
+contract l2P2PMarketPlace is Ownable, Pausable {
     struct OrderInfo {
         uint256 orderId;
         address creator;

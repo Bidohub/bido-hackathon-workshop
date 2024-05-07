@@ -16,8 +16,10 @@
 `buy(bytes _btcAddr, bytes _assetName, uint256 _assetAmount, uint8 _assetDivisibility)`
 * 允许用户在不直接接触比特币网络的情况下，在 Bevm 上发起购买 BTC 的订单。
 * 此函数还自动计算交易费用，并将订单详细信息记录在链上。
+
 `cancel(uint256 _orderId)`
 * 为用户提供了一种简单的方式来取消未完成的订单，系统自动处理资金的返还。
+
 `sell(uint256[] _orderIds, bytes[] _txids)`
 * 允许卖家完成订单，系统自动处理从 L2 到 L1 的资金转移，确保交易的准确执行。
 

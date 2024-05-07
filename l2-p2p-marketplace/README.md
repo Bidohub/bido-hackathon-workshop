@@ -11,11 +11,14 @@ Features
 * Security Measures: Includes checks for order validity, execution rights, and appropriate transaction states to prevent unauthorized actions and ensure transaction correctness.
 
 ## Smart Contract Functions
+
 `buy(bytes _btcAddr, bytes _assetName, uint256 _assetAmount, uint8 _assetDivisibility)`
 * Allows users to place a buy order by specifying their Bitcoin address, the asset name (Runes), and the amount and divisibility of the asset.
 * The function calculates the transaction fee based on the current fee rate and logs the order details.
+
 `cancel(uint256 _orderId)`
 * Enables users to cancel their orders if they have not been executed or fulfilled, returning the invested BTC amount.
+
 `sell(uint256[] _orderIds, bytes[] _txids)`
 * Allows the seller to execute multiple orders. Sellers must provide the transaction IDs for the BTC transactions as proof of token transfer.
 * The function aggregates the total BTC amount from all fulfilled orders and transfers it to the owner’s address.
