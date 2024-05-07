@@ -101,7 +101,25 @@ contract l2P2PMarketPlace is Ownable, Pausable {
         revert("NOT_SUPPORT_RECEIVE");
     }
 
-    function buy(
+    // 初始化跨链交易
+    function initiateCrossChainTransaction(
+        bytes memory _btcAddr,
+        uint256 _btcAmount
+    ) private {
+        // 调用跨链桥的合约进行资金锁定
+        // 这里需要根据实际的跨链桥合约接口进行调整
+    }
+
+    // 处理跨链资金接收
+    function handleReceivedFunds(uint256 _orderId, bytes32 _txid) private {
+        // 验证交易并更新订单状态
+        OrderInfo storage order = orderInfos[_orderId];
+        order.txid = _txid;
+        order.status = 1; // 标记为完成
+        emit Unlocked(order.creator, order.btcAmount);
+    }
+
+    function buyWithCrossChain(
         bytes calldata _btcAddr,
         bytes calldata _assetName,
         uint256 _assetAmount,
@@ -109,7 +127,8 @@ contract l2P2PMarketPlace is Ownable, Pausable {
     ) external payable whenNotPaused {
         require(msg.value > 0, "VALUE IS ZERO");
         uint256 newOrderId = nextOrderId;
-        orderInfos[newOrderId] = OrderInfo({
+        OrderInfo storage newOrder = orderInfos[newOrderId];
+        newOrder = OrderInfo({
             orderId: newOrderId,
             creator: msg.sender,
             btcAddr: _btcAddr,
@@ -121,8 +140,9 @@ contract l2P2PMarketPlace is Ownable, Pausable {
             status: 0,
             txid: bytes("")
         });
-        nextOrderId += 1;
-        emit Buy(orderInfos[newOrderId]);
+        nextOrderId++;
+        initiateCrossChainTransaction(_btcAddr, msg.value); // 初始化跨链交易
+        emit Buy(newOrder);
     }
 
     function cancel(uint256 _orderId) external whenNotPaused {
@@ -135,21 +155,22 @@ contract l2P2PMarketPlace is Ownable, Pausable {
         emit Cancel(orderInfos[_orderId]);
     }
 
-    function sell(
+    function sellWithCrossChain(
         uint256[] calldata _orderIds,
         bytes[] memory _txids
     ) external onlySeller whenNotPaused {
         require(_orderIds.length == _txids.length, "INVALID LENGTH");
         uint256 allBtcAmount;
-        uint256 latestOrderId = nextOrderId;
         for (uint256 i; i < _orderIds.length; i++) {
-            require(_orderIds[i] < latestOrderId, "NOT ORDER");
-            OrderInfo memory orderInfo = orderInfos[_orderIds[i]];
-            require(orderInfo.status == 0, "ORDER FINISHED");
+            require(
+                _orderIds[i] < nextOrderId &&
+                    orderInfos[_orderIds[i]].status == 0,
+                "INVALID ORDER"
+            );
+            OrderInfo storage orderInfo = orderInfos[_orderIds[i]];
+            handleReceivedFunds(_orderIds[i], _txids[i]); // 处理接收到的资金
             allBtcAmount += orderInfo.btcAmount;
-            orderInfos[_orderIds[i]].status = 1;
-            orderInfos[_orderIds[i]].txid = _txids[i];
-            emit Sell(orderInfos[_orderIds[i]]);
+            emit Sell(orderInfo);
         }
         _sendValue(owner(), allBtcAmount);
     }

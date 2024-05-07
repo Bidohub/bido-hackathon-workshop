@@ -1,46 +1,52 @@
-## Decentralized P2P Runes Marketplace on Bevm
-This document provides a detailed description of the decentralized market operations for trading Runes tokens on the Bevm platform, where users can directly purchase BTC assets located on the first layer (L1, i.e., the Bitcoin network) on the second layer (L2), and the entire purchasing process is seamless for users, without the need for users to be aware of the blockchain layer being operated on.
+# Decentralized P2P Runes Marketplace on Bevm
+
+This document provides a detailed description of the decentralized market operations for trading Runes tokens on the Bevm platform. Users can directly purchase BTC assets located on the first layer (L1, i.e., the Bitcoin network) on the second layer (L2), and the entire purchasing process is seamless for users, without the need for users to be aware of the blockchain layer being operated on.
 
 ## Contract Overview
-The BuyOrder smart contract on Bevm facilitates the creation and management of buy orders for Runes tokens. This contract integrates various functionalities such as order placement, cancellation, and execution while ensuring the integrity and security of the transactions.
 
-Features
-* Order Placement: Users can place orders specifying the amount of Runes tokens they wish to buy and the price they are willing to pay in BTC.
-* Order Execution: Owners (or designated sellers) can execute these orders by transferring the specified amount of Runes tokens and receiving BTC in return.
-* Decentralized Control: The contract is governed through owner privileges for critical administrative functions and seller-specific actions controlled via seller flags.
-* Security Measures: Includes checks for order validity, execution rights, and appropriate transaction states to prevent unauthorized actions and ensure transaction correctness.
+The `l2MarketPlace` smart contract on Bevm facilitates the creation and management of buy orders for Runes tokens. This contract integrates various functionalities such as order placement, cancellation, and execution while ensuring the integrity and security of the transactions.
+
+## Features
+* **Transparent Layer Interaction**: User operations on L2 directly affect the BTC asset status on L1, all handled automatically by the smart contract without any need for direct interaction with the Bitcoin network.
+* **Order Placement and Execution**: Users can place buy orders through a simple interface on Bevm, with the system automatically handling all transactions and transfers related to BTC assets.
+* **Decentralized Control and Security Measures**: Control mechanisms implemented through the smart contract ensure the security and transparency of transactions, preventing unauthorized actions.
+
+## Integrated Cross-Chain Bridge Features
+
+### Operations Using the Cross-Chain Bridge
+Utilizing the decentralized cross-chain bridge, `l2MarketPlace` can perform the following key functions:
+
+#### `initiateCrossChainBuy`
+- When a user initiates a buy order for BTC on Bevm, the contract uses the cross-chain bridge to lock the corresponding BTC on the Bitcoin network.
+- This feature ensures users can directly control BTC assets from Bevm, enhancing convenience and speed.
+
+#### `finalizeCrossChainSell`
+- When an order is executed on Bevm, the contract triggers the release of the corresponding BTC to the seller's specified address on the Bitcoin network via the cross-chain bridge.
+- This process automates the transfer of BTC from L2 to L1, ensuring the security of funds and transparency of transactions.
 
 ## Smart Contract Functions
 
-`buy(bytes _btcAddr, bytes _assetName, uint256 _assetAmount, uint8 _assetDivisibility)`
-* Allows users to place a buy order by specifying their Bitcoin address, the asset name (Runes), and the amount and divisibility of the asset.
-* The function calculates the transaction fee based on the current fee rate and logs the order details.
+### `buyWithCrossChain(bytes _btcAddr, bytes _assetName, uint256 _assetAmount, uint8 _assetDivisibility)`
+* Allows users to initiate buy orders for BTC on Bevm without directly accessing the Bitcoin network.
+* This function also automatically calculates transaction fees and records the order details on the blockchain.
 
-`cancel(uint256 _orderId)`
-* Enables users to cancel their orders if they have not been executed or fulfilled, returning the invested BTC amount.
+### `cancel(uint256 _orderId)`
+* Provides users a straightforward method to cancel unexecuted orders, with the system automatically handling the refund of invested funds.
 
-`sell(uint256[] _orderIds, bytes[] _txids)`
-* Allows the seller to execute multiple orders. Sellers must provide the transaction IDs for the BTC transactions as proof of token transfer.
-* The function aggregates the total BTC amount from all fulfilled orders and transfers it to the owner’s address.
-
-`update(uint256[] _orderIds, bytes[] _txids)`
-* Used by sellers to update the blockchain transaction IDs associated with executed orders, ensuring transparency and traceability of the executed trades.
+### `sellWithCrossChain(uint256[] _orderIds, bytes[] _txids)`
+* Allows sellers to complete orders, with the system automatically managing the transfer of funds from L2 to L1, ensuring accurate execution of transactions.
 
 ## Security and Operational Controls
-* Pausable Operations: The contract can be paused or resumed by the owner, providing a way to stop operations in case of emergency or maintenance.
-* ReFund Mechanism: Allows the contract owner to refund BTC, providing an additional layer of control over the contract’s financial operations.
+* **Seamless Cross-Layer Operations**: Cross-layer transactions are automatically managed by the smart contract, sparing users the need to worry about underlying technical details.
+* **Emergency Control Mechanisms**: The contract provides functionalities to pause and resume operations, ensuring that activities can be immediately stopped when necessary.
 
 ## Example Usage
 
 **Placing an Order**
-
-```
-contractInstance.buy("btc_address", "Runes", 100, 1, {value: web3.toWei(0.1, "ether")});
-
+```solidity
+contractInstance.buyWithCrossChain("btc_address", "Runes", 100, 1, {value: web3.toWei(0.1, "ether")});
 ```
 ** Executing an Order
-
 ```
-contractInstance.sell([orderId], ["txid"]);
-
+contractInstance.sellWithCrossChain([orderId], ["txid"]);
 ```
